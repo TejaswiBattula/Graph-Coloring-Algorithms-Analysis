@@ -2,6 +2,9 @@ import input
 from algorithms.greedy.greedy_sequential import greedyColoring
 from algorithms.greedy.welsh_powell import welshPowellColoring
 from algorithms.greedy.DSatur import dsatur
+from algorithms.backtracking.backtracking import backtracking_graph_coloring
+from algorithms.backtracking.forward_checking import ForwardChecking 
+from algorithms.backtracking.constraint_satisfaction import ConstraintSatisfaction 
 import time
 import random
 import plot
@@ -11,7 +14,10 @@ def execute_sorting_algorithms(array, n):
     algorithms = [
         ("Greedy Sequential", greedyColoring),
         ("Welsh Powell", welshPowellColoring),
-        ("DSatur", dsatur)
+        ("DSatur", dsatur),
+        ("Backtracking", backtracking_graph_coloring),
+        ("Forward Checking", ForwardChecking),
+        ("Constraint Satisfaction", ConstraintSatisfaction)
     ]
 
     results = {}
@@ -24,21 +30,24 @@ def execute_sorting_algorithms(array, n):
         duration = end_time - start_time
         results[algorithm_name] = {"duration": duration, "chromatic_number": chromatic_number}
 
+        print(algorithm_name)
+        print(result)
+        print(chromatic_number)
     return results
 
 def generateGraph2():
     print("started")
     scenarios = [input.linear_graph, input.dense_graph]
-    points = 5
+    points = 2
     n = 10
     results = []
 
     while points:
+        print(f"Point: {points}")
         for scenario in scenarios:
+            print(scenario)
             graph = scenario(n)
             results.append({"Length": n, "Scenario": scenario.__name__, **execute_sorting_algorithms(graph, n)})
-
-        print(f"Point: {points}")
         n += 10
         points -= 1
 

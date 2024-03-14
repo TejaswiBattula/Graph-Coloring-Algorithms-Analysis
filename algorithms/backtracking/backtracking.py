@@ -34,7 +34,17 @@ def backtracking_graph_coloring(graph, V):
 #     2: [0, 1]
 # }
 
-# chromatic_number, coloring = backtracking_graph_coloring(graph)
+# graph = {
+#     0: [1, 2],   # Node A is connected to nodes B and C
+#     1: [0, 3],   # Node B is connected to nodes A, C, and D
+#     2: [0, 3],   # Node C is connected to nodes A, B, and D
+#     3: [1, 2, 4],   # Node D is connected to nodes B, C, and E
+#     4: [3]    # Node E is connected to node D
+# }
+
+# chromatic_number, coloring = backtracking_graph_coloring(graph, 5)
+# print(chromatic_number)
+# print(coloring)
 # if coloring:
 #     print(f"Chromatic number of the graph: {chromatic_number}")
 #     print("Graph coloring solution:")

@@ -81,5 +81,12 @@ def ForwardChecking(graph, V):
     return color_assignments, count                   
 
 # G2 = {0: [1, 2], 1: [0, 2, 3], 2: [0, 1, 3], 3: [1, 2, 4], 4: [3]}
-# min_number = ForwardChecking(G2)
+# G2 = {
+#     0: [1, 2],   # Node A is connected to nodes B and C
+#     1: [0, 3],   # Node B is connected to nodes A, C, and D
+#     2: [0, 3],   # Node C is connected to nodes A, B, and D
+#     3: [1, 2, 4],   # Node D is connected to nodes B, C, and E
+#     4: [3]    # Node E is connected to node D
+# }
+# min_number = ForwardChecking(G2, 5)
 # print("Minimum no of colors required for Australia map: ", min_number)

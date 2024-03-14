@@ -11,7 +11,7 @@ def plot_results(results, ylabel):
         lengths = [result["Length"] for result in group]
 
         # Separate values for each algorithm
-        algorithm_values = {algorithm: np.array([result[algorithm][ylabel] for result in group]) for algorithm in ["Greedy Sequential", "Welsh Powell", "DSatur"]}
+        algorithm_values = {algorithm: np.array([result[algorithm][ylabel] for result in group]) for algorithm in ["Greedy Sequential", "Welsh Powell", "DSatur", "Backtracking", "Forward Checking", "Constraint Satisfaction"]}
 
         # Plot for each algorithm with a different color
         for j, (algorithm, values) in enumerate(algorithm_values.items()):
@@ -21,13 +21,13 @@ def plot_results(results, ylabel):
         plt.xlabel('Length')
         plt.ylabel(ylabel)
 
-        plt.title(f'Size of Input vs {ylabel} for Sorting Algorithms - {scenario}')
+        plt.title(f'Size of Input vs {ylabel} for Algorithms - {scenario}')
 
         # Add a legend
         plt.legend()
 
         # Save the plot to a file
-        plt.savefig(f'output/sorting_algorithms_line_{scenario}_{ylabel.replace(" ", "_")}.png')
+        plt.savefig(f'output/{scenario}_{ylabel.replace(" ", "_")}.png')
 
         # Show the plot
         plt.show()

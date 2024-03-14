@@ -1,27 +1,28 @@
 # input
 
 
-# linear graph 
-# dense graph
-# Sparse Graph
-# Regular Graph
-# Bipartite Graph
-# Power Law Graphs
-# Planar Graphs
+
+
+
+
+
 # Graphs with Cliques
 # Graphs with Independent Sets
-# Disconnected Graph
-# Graphs with Bridges and Cut Vertices
+
+
 
 
 import random
 
+
+# linear graph 
 def linear_graph(V):
     adjacency_list = {i: [i - 1, i + 1] for i in range(V)}
     adjacency_list[0] = [1]
     adjacency_list[V - 1] = [V - 2]
     return adjacency_list
 
+# dense graph
 def dense_graph(V, edge_probability=0.5):
     adjacency_list = {i: [] for i in range(V)}
     for i in range(V):
@@ -31,6 +32,8 @@ def dense_graph(V, edge_probability=0.5):
                 adjacency_list[j].append(i)
     return adjacency_list
 
+
+# Sparse Graph
 def sparse_graph(V, edge_probability=0.1):
     adjacency_list = {i: [] for i in range(V)}
     for i in range(V):
@@ -40,7 +43,9 @@ def sparse_graph(V, edge_probability=0.1):
                 adjacency_list[j].append(i)
     return adjacency_list
 
-def regular_graph(V, degree):
+# Regular Graph
+def regular_graph(V):
+    degree = random.randint(2, V // 2) * 2
     if V % 2 != 0 or degree % 2 != 0:
         raise ValueError("The number of nodes and degree must be even for a regular graph.")
     
@@ -48,6 +53,7 @@ def regular_graph(V, degree):
                         [(i - j) % V for j in range(1, degree // 2 + 1)] for i in range(V)}
     return adjacency_list
 
+# Bipartite Graph
 def bipartite_graph(V):
     if V % 2 != 0:
         raise ValueError("The number of nodes must be even for a bipartite graph.")
@@ -57,12 +63,7 @@ def bipartite_graph(V):
     adjacency_list.update({i + partition_size: [i] for i in range(partition_size)})
     return adjacency_list
 
-def power_law_graph(V, m=3, seed=None):
-    random.seed(seed)
-    degrees = [random.paretovariate(m) for _ in range(V)]
-    adjacency_list = {i: random.sample(range(V), int(degrees[i])) for i in range(V)}
-    return adjacency_list
-
+# Planar Graphs
 def planar_graph(V):
     # Generating a simple planar graph for illustration
     if V < 3:
@@ -73,33 +74,34 @@ def planar_graph(V):
     adjacency_list[V - 2].append(0)
     return adjacency_list
 
-def graph_with_cliques(V, clique_sizes):
-    if sum(clique_sizes) != V:
-        raise ValueError("The sum of clique sizes must be equal to the number of nodes.")
+# def graph_with_cliques(V, clique_sizes):
+#     if sum(clique_sizes) != V:
+#         raise ValueError("The sum of clique sizes must be equal to the number of nodes.")
     
-    start = 0
-    adjacency_list = {}
-    for size in clique_sizes:
-        clique = list(range(start, start + size))
-        adjacency_list.update({i: clique for i in clique})
-        start += size
-    return adjacency_list
+#     start = 0
+#     adjacency_list = {}
+#     for size in clique_sizes:
+#         clique = list(range(start, start + size))
+#         adjacency_list.update({i: clique for i in clique})
+#         start += size
+#     return adjacency_list
 
-def graph_with_independent_sets(V, set_sizes):
-    if sum(set_sizes) != V:
-        raise ValueError("The sum of set sizes must be equal to the number of nodes.")
+# def graph_with_independent_sets(V, set_sizes):
+#     if sum(set_sizes) != V:
+#         raise ValueError("The sum of set sizes must be equal to the number of nodes.")
     
-    start = 0
-    adjacency_list = {}
-    for size in set_sizes:
-        node = start
-        for _ in range(size - 1):
-            adjacency_list[node] = [node + 1]
-            node += 1
-        start += size
-    return adjacency_list
+#     start = 0
+#     adjacency_list = {}
+#     for size in set_sizes:
+#         node = start
+#         for _ in range(size - 1):
+#             adjacency_list[node] = [node + 1]
+#             node += 1
+#         start += size
+#     return adjacency_list
 
-def disconnected_graph(V, components):
+# Disconnected Graph
+def disconnected_graph(V, components = [2, 1, 2]):
     if sum(components) != V:
         raise ValueError("The sum of component sizes must be equal to the number of nodes.")
     
@@ -111,11 +113,25 @@ def disconnected_graph(V, components):
         adjacency_list.update({i: [] for i in component})
     return adjacency_list
 
+# Graphs with Bridges and Cut Vertices
 def graph_with_bridges_and_cut_vertices(V):
     if V < 3:
         raise ValueError("A graph with bridges and cut vertices must have at least 3 nodes.")
     
-    adjacency_list = {0: [1], 1: [0, 2], 2: [1]}
+    # Initialize an empty adjacency list
+    adjacency_list = {i: [] for i in range(V)}
+    
+    # Add random edges to form a connected graph
+    for i in range(V - 1):
+        j = random.randint(i + 1, V - 1)
+        adjacency_list[i].append(j)
+        adjacency_list[j].append(i)
+    
+    # Add an extra edge to create a cycle
+    j = random.randint(0, V - 1)
+    adjacency_list[0].append(j)
+    adjacency_list[j].append(0)
+    
     return adjacency_list
 
 # # Example usage:
