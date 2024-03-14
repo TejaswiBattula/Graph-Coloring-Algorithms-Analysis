@@ -1,0 +1,2 @@
+pip install networkx matplotlib
+pip install seaborn

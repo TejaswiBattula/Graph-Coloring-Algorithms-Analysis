@@ -2,8 +2,6 @@ import random
 import copy
 import pandas as pd
 
-noOfBacktracks = 0
-
 #Function to inilialize assigned colors
 def initColorDict(states):
     assignedColor = {}
