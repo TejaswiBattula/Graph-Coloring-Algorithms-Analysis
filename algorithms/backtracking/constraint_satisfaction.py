@@ -1,6 +1,11 @@
 import random
 import copy
 import pandas as pd
+import sys
+# when dealing with bucket short the array size greater than 2000 seems to take a lot of time on my system and freeze
+# the computer
+sys.setrecursionlimit(10 ** 6)
+MIN_MERGE = 32
 
 #Function to inilialize assigned colors
 def initColorDict(states):
@@ -68,7 +73,6 @@ def leastConstrainingValueHeuristic(currentState, domain, neighbors):
 
             
 def ForwardcheckWithSingletonPropogationAndHeuristics(states, neighbours, colors, domain):
-    global noOfBacktracks
     if all(value != 'Nil' for value in colors.values()):
         return "Success"
     # Use minimum heuristics( and degree heuristics ) to select next unassigned variable 
@@ -104,7 +108,6 @@ def ForwardcheckWithSingletonPropogationAndHeuristics(states, neighbours, colors
             # add currentState back since assignment failed
             states.append(currentState)
     if colors[currentState] == 'Nil':
-        noOfBacktracks = noOfBacktracks + 1
         return "Failure"
 
 #Function to get the minimum chromatic number of the map

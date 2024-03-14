@@ -15,9 +15,9 @@ def execute_sorting_algorithms(array, n):
         ("Greedy Sequential", greedyColoring),
         ("Welsh Powell", welshPowellColoring),
         ("DSatur", dsatur),
-        ("Backtracking", backtracking_graph_coloring),
-        ("Forward Checking", ForwardChecking),
-        ("Constraint Satisfaction", ConstraintSatisfaction)
+        # ("Backtracking", backtracking_graph_coloring),
+        # ("Forward Checking", ForwardChecking),
+        # ("Constraint Satisfaction", ConstraintSatisfaction)
     ]
 
     results = {}
@@ -37,8 +37,9 @@ def execute_sorting_algorithms(array, n):
 
 def generateGraph2():
     print("started")
-    scenarios = [input.linear_graph, input.dense_graph]
-    points = 2
+    scenarios = [input.dense_graph]
+    #[input.linear_graph, input.dense_graph, input.sparse_graph, input.regular_graph, input.bipartite_graph, input.planar_graph, input.disconnected_graph, input.graph_with_bridges_and_cut_vertices]
+    points = 20
     n = 10
     results = []
 
@@ -47,6 +48,7 @@ def generateGraph2():
         for scenario in scenarios:
             print(scenario)
             graph = scenario(n)
+            print(graph)
             results.append({"Length": n, "Scenario": scenario.__name__, **execute_sorting_algorithms(graph, n)})
         n += 10
         points -= 1

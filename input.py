@@ -1,17 +1,6 @@
 # input
 
 
-
-
-
-
-
-# Graphs with Cliques
-# Graphs with Independent Sets
-
-
-
-
 import random
 
 
@@ -74,43 +63,24 @@ def planar_graph(V):
     adjacency_list[V - 2].append(0)
     return adjacency_list
 
-# def graph_with_cliques(V, clique_sizes):
-#     if sum(clique_sizes) != V:
-#         raise ValueError("The sum of clique sizes must be equal to the number of nodes.")
-    
-#     start = 0
-#     adjacency_list = {}
-#     for size in clique_sizes:
-#         clique = list(range(start, start + size))
-#         adjacency_list.update({i: clique for i in clique})
-#         start += size
-#     return adjacency_list
-
-# def graph_with_independent_sets(V, set_sizes):
-#     if sum(set_sizes) != V:
-#         raise ValueError("The sum of set sizes must be equal to the number of nodes.")
-    
-#     start = 0
-#     adjacency_list = {}
-#     for size in set_sizes:
-#         node = start
-#         for _ in range(size - 1):
-#             adjacency_list[node] = [node + 1]
-#             node += 1
-#         start += size
-#     return adjacency_list
-
 # Disconnected Graph
-def disconnected_graph(V, components = [2, 1, 2]):
-    if sum(components) != V:
-        raise ValueError("The sum of component sizes must be equal to the number of nodes.")
-    
+def disconnected_graph(V):
+    components = []
+    remaining_vertices = V
+
+    while remaining_vertices > 0:
+        size = random.randint(1, remaining_vertices)  # Randomly select component size
+        components.append(size)
+        remaining_vertices -= size
+
     start = 0
     adjacency_list = {}
+
     for size in components:
         component = list(range(start, start + size))
         start += size
         adjacency_list.update({i: [] for i in component})
+
     return adjacency_list
 
 # Graphs with Bridges and Cut Vertices

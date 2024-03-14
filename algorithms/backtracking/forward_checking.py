@@ -2,6 +2,11 @@
 import random
 import copy
 from datetime import datetime
+import sys
+# when dealing with bucket short the array size greater than 2000 seems to take a lot of time on my system and freeze
+# the computer
+sys.setrecursionlimit(10 ** 6)
+MIN_MERGE = 32
 
 
 # Function to inilialize assigned colors

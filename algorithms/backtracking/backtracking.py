@@ -1,3 +1,9 @@
+import sys
+# when dealing with bucket short the array size greater than 2000 seems to take a lot of time on my system and freeze
+# the computer
+sys.setrecursionlimit(10 ** 6)
+MIN_MERGE = 32
+
 def is_valid(graph, vertex, color, assignment):
     for neighbor in graph[vertex]:
         if neighbor in assignment and assignment[neighbor] == color:
