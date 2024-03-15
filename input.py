@@ -43,14 +43,35 @@ def regular_graph(V):
     return adjacency_list
 
 # Bipartite Graph
+# def bipartite_graph(V):
+#     if V % 2 != 0:
+#         raise ValueError("The number of nodes must be even for a bipartite graph.")
+    
+#     partition_size = V // 2
+#     adjacency_list = {i: [i + partition_size] for i in range(partition_size)}
+#     adjacency_list.update({i + partition_size: [i] for i in range(partition_size)})
+#     return adjacency_list
+
 def bipartite_graph(V):
     if V % 2 != 0:
         raise ValueError("The number of nodes must be even for a bipartite graph.")
     
     partition_size = V // 2
-    adjacency_list = {i: [i + partition_size] for i in range(partition_size)}
-    adjacency_list.update({i + partition_size: [i] for i in range(partition_size)})
+    adjacency_list = {i: [(i + j) % partition_size + partition_size] for i in range(partition_size) for j in range(1, partition_size)}
+    adjacency_list.update({i + partition_size: [(i + j) % partition_size] for i in range(partition_size) for j in range(1, partition_size)})
     return adjacency_list
+
+def crown_graph2(n):
+    if(n%2!=0):
+        print("crown graph can not be generated with odd vertices.")
+        return
+    n = n//2
+    adj_list = {}
+    for i in range(n):
+        adj_list[i] = [j + n for j in range(n) if j != i]
+    for j in range(n):
+        adj_list[j + n] = [i for i in range(n) if i != j]
+    return adj_list
 
 # Planar Graphs
 def planar_graph(V):
@@ -64,9 +85,14 @@ def planar_graph(V):
     return adjacency_list
 
 # Disconnected Graph
-def disconnected_graph(V):
+def disconnected_graph(V, isolation_probability=0.5):
     components = []
     remaining_vertices = V
+
+    # Randomly assign isolated nodes based on the default probability
+    isolated = [random.random() < isolation_probability for _ in range(V)]
+    isolated_count = sum(isolated)
+    remaining_vertices -= isolated_count
 
     while remaining_vertices > 0:
         size = random.randint(1, remaining_vertices)  # Randomly select component size
@@ -81,7 +107,19 @@ def disconnected_graph(V):
         start += size
         adjacency_list.update({i: [] for i in component})
 
+    # Randomly add edges between non-isolated nodes
+    non_isolated_nodes = [i for i in range(V) if not isolated[i]]
+    for node in non_isolated_nodes:
+        neighbors = random.sample(non_isolated_nodes, random.randint(0, len(non_isolated_nodes) - 1))
+        adjacency_list[node] = neighbors
+
+    # Add isolated nodes to the adjacency list
+    isolated_nodes = [i for i in range(V) if isolated[i]]
+    for node in isolated_nodes:
+        adjacency_list[node] = []
+
     return adjacency_list
+
 
 # Graphs with Bridges and Cut Vertices
 def graph_with_bridges_and_cut_vertices(V):
