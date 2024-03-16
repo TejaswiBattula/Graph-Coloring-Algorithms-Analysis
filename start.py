@@ -12,9 +12,9 @@ import math
 
 def execute_sorting_algorithms(array, n):
     algorithms = [
-        # ("Greedy Sequential", greedyColoring),
-        # ("Welsh Powell", welshPowellColoring),
-        # ("DSatur", dsatur),
+        ("Greedy Sequential", greedyColoring),
+        ("Welsh Powell", welshPowellColoring),
+        ("DSatur", dsatur),
         ("Backtracking", backtracking_graph_coloring),
         ("Forward Checking", ForwardChecking),
         ("Constraint Satisfaction", ConstraintSatisfaction)
@@ -35,11 +35,11 @@ def execute_sorting_algorithms(array, n):
         print(chromatic_number)
     return results
 
-def generateGraph2():
+def generateGraph():
     print("started")
-    scenarios = [input.dense_graph]
-    #[input.linear_graph, input.dense_graph, input.sparse_graph, input.regular_graph, input.bipartite_graph, input.planar_graph, input.disconnected_graph, input.graph_with_bridges_and_cut_vertices]
-    points = 5
+    scenarios = [input.linear_graph, input.dense_graph, input.sparse_graph, input.regular_graph, input.bipartite_graph, input.planar_graph, input.disconnected_graph, input.graph_with_bridges_and_cut_vertices, input.crown_graph]
+    #[input.linear_graph, input.dense_graph, input.sparse_graph, input.regular_graph, input.bipartite_graph, input.planar_graph, input.disconnected_graph, input.graph_with_bridges_and_cut_vertices, input.crown_graph]
+    points = 20
     n = 10
     results = []
 
@@ -50,11 +50,11 @@ def generateGraph2():
             graph = scenario(n)
             #print(graph)
             results.append({"Length": n, "Scenario": scenario.__name__, **execute_sorting_algorithms(graph, n)})
-        n += 10
+        n += 50000
         points -= 1
 
     # Plot both time vs input and chromatic number vs input
     plot.plot_results(results, 'duration')
     plot.plot_results(results, 'chromatic_number')
 
-generateGraph2()
+generateGraph()

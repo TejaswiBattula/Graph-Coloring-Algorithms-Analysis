@@ -1,6 +1,4 @@
 # input
-
-
 import random
 
 
@@ -42,16 +40,6 @@ def regular_graph(V):
                         [(i - j) % V for j in range(1, degree // 2 + 1)] for i in range(V)}
     return adjacency_list
 
-# Bipartite Graph
-# def bipartite_graph(V):
-#     if V % 2 != 0:
-#         raise ValueError("The number of nodes must be even for a bipartite graph.")
-    
-#     partition_size = V // 2
-#     adjacency_list = {i: [i + partition_size] for i in range(partition_size)}
-#     adjacency_list.update({i + partition_size: [i] for i in range(partition_size)})
-#     return adjacency_list
-
 def bipartite_graph(V):
     if V % 2 != 0:
         raise ValueError("The number of nodes must be even for a bipartite graph.")
@@ -61,7 +49,7 @@ def bipartite_graph(V):
     adjacency_list.update({i + partition_size: [(i + j) % partition_size] for i in range(partition_size) for j in range(1, partition_size)})
     return adjacency_list
 
-def crown_graph2(n):
+def crown_graph(n):
     if(n%2!=0):
         print("crown graph can not be generated with odd vertices.")
         return

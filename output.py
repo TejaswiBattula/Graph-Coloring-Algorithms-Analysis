@@ -1,7 +1,4 @@
 # take the graph output from algorithms with color and generate the graph.
-# pip install networkx matplotlib
-# pip install seaborn
-
 
 import networkx as nx
 import matplotlib.pyplot as plt

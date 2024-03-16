@@ -11,9 +11,9 @@ def plot_results(results, ylabel):
         lengths = [result["Length"] for result in group]
 
         # Separate values for each algorithm
-        algorithm_values = {algorithm: np.array([result[algorithm][ylabel] for result in group]) for algorithm in ["Backtracking", "Forward Checking", "Constraint Satisfaction"]}
+        algorithm_values = {algorithm: np.array([result[algorithm][ylabel] for result in group]) for algorithm in ["Greedy Sequential", "Welsh Powell", "Backtracking"]}
         # "Backtracking", "Forward Checking", "Constraint Satisfaction"
-        # Greedy Sequential", "Welsh Powell", "DSatur",
+        # "Greedy Sequential", "Welsh Powell", "DSatur",
 
         # Plot for each algorithm with a different color
         for j, (algorithm, values) in enumerate(algorithm_values.items()):
